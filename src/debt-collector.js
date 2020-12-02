@@ -49,7 +49,11 @@ class DebtCollector {
   // Returns remaining amount needed to pay off debt
   getRemainingAmount(debt, paymentPlan) {
     let paymentPlanId = paymentPlan.id;
-    let totalPaid = this.aggregatedPayments[paymentPlanId]['amount_paid'];
+
+    let totalPaid = 0;
+    if (this.aggregatedPayments.hasOwnProperty(paymentPlanId)) {
+      totalPaid = this.aggregatedPayments[paymentPlan.id]['amount_paid'];
+    }
 
     return paymentPlan.amount_to_pay - totalPaid;
   }
@@ -71,8 +75,10 @@ class DebtCollector {
     if (frequency === 'BI_WEEKLY') {
       numWeeks = 2;
     }
-
-    let totalPaid = this.aggregatedPayments[paymentPlan.id]['amount_paid'];
+    let totalPaid = 0;
+    if (this.aggregatedPayments.hasOwnProperty(paymentPlan.id)) {
+       totalPaid = this.aggregatedPayments[paymentPlan.id]['amount_paid'];
+    }
     // determine what payment number they are on
     // 2 or 2.5 payments made, means they are on payment 3
     let paymentNumber = Math.floor(totalPaid / paymentPlan.installment_amount) + 1;
@@ -102,9 +108,8 @@ class DebtCollector {
       }
 
       if (output) {
-        console.log(debt);
-        // todo: to make this oneline, uncomment
-        //console.log(JSON.stringify(debt));
+        //console.log(debt);
+        console.log(JSON.stringify(debt));
       }
 
     });
