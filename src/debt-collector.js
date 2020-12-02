@@ -7,9 +7,9 @@ class DebtCollector {
   paymentsUrl = 'https://my-json-server.typicode.com/druska/trueaccord-mock-payments-api/payments';
 
   constructor(debts, plans, payments) {
-    this.debts = debts || {};
-    this.paymentPlans = plans || {};
-    this.payments = payments || {};
+    this.debts = debts || [];
+    this.paymentPlans = plans || [];
+    this.payments = payments || [];
   }
 
   // Fetch data from API asynchronously
@@ -32,6 +32,10 @@ class DebtCollector {
   // Aggregate payments for each payment plan
   calculateAmountPaid() {
     this.aggregatedPayments = {};
+    if (this.payments && this.payments.length === 0) {
+      return;
+    }
+
     this.payments.forEach((payment) => {
       let planId = payment.payment_plan_id;
       if (!this.aggregatedPayments.hasOwnProperty(planId)) {
