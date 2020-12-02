@@ -63,9 +63,9 @@ class DebtCollector {
       return null;
     }
     let frequency = paymentPlan.installment_frequency;
-    let paymentStartISOString = paymentPlan.start_date;
+    let paymentStartString = paymentPlan.start_date;
 
-    let paymentStartDate = new Date(paymentStartISOString);
+    let paymentStartDate = new Date(paymentStartString);
 
     let numWeeks = 1; // default to WEEKLY
     if (frequency === 'BI_WEEKLY') {
@@ -75,10 +75,15 @@ class DebtCollector {
     let totalPaid = this.aggregatedPayments[paymentPlan.id]['amount_paid'];
     // determine what payment number they are on
     // 2 or 2.5 payments made, means they are on payment 3
-    let paymentNumber = Math.floor(totalPaid / paymentPlan.amount_to_pay) + 1;
+    let paymentNumber = Math.floor(totalPaid / paymentPlan.installment_amount) + 1;
 
     paymentStartDate.setDate(paymentStartDate.getDate() + (numWeeks * 7 * paymentNumber));
-    return paymentStartDate.toISOString();
+
+    // this is needed to ignore UTC offsets
+    // time is not given via API so lets set things back to 0:00
+    // src: https://stackoverflow.com/questions/17545708/parse-date-without-timezone-javascript
+    let offsetFreeDate = new Date(paymentStartDate.getTime() - paymentStartDate.getTimezoneOffset() * 60000);
+    return offsetFreeDate.toISOString();
   }
 
   // Process each of the debts to determine additional fields
