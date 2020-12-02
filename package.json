@@ -1,0 +1,19 @@
+{
+  "name": "trueaccord-project",
+  "version": "1.0.0",
+  "description": "Interview project for TrueAccord",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "test": "mocha"
+  },
+  "author": "dbryan",
+  "license": "ISC",
+  "dependencies": {
+    "chai": "^4.2.0",
+    "mocha": "^8.2.1",
+    "nock": "^13.0.5",
+    "request": "^2.88.2",
+    "request-promise": "^4.2.6"
+  }
+}
