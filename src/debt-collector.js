@@ -87,7 +87,7 @@ class DebtCollector {
 
     this.debts.forEach((debt) => {
       let paymentPlan = this.paymentPlans.find((plan) => plan.debt_id === debt.id) || null;
-      debt['is_in_payment_plan'] = this.aggregatedPayments[debt.id] != null;
+      debt['is_in_payment_plan'] = paymentPlan != null;
       if (debt.is_in_payment_plan) {
         debt['remaining_amount'] = this.getRemainingAmount(debt, paymentPlan);
         debt['next_payment_due_date'] = this.getNextPaymentDate(debt, paymentPlan);
