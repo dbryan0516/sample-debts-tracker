@@ -3,9 +3,11 @@ const request = require("request-promise");
 
 // helper function for simple GET requests
 async function apiGet(uri) {
-  let options = {method: 'GET',
+  let options = {
+    method: 'GET',
     uri: uri,
-    requestHeaders: {"Content-Type":"application/json"}};
+    requestHeaders: {"Content-Type":"application/json"}
+  };
 
   return await request(options).then((response) => {
     return JSON.parse(response);

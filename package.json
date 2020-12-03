@@ -12,8 +12,10 @@
   "dependencies": {
     "chai": "^4.2.0",
     "mocha": "^8.2.1",
-    "nock": "^13.0.5",
     "request": "^2.88.2",
     "request-promise": "^4.2.6"
+  },
+  "devDependencies": {
+    "nyc": "^15.1.0"
   }
 }
