@@ -1,7 +1,7 @@
 {
-  "name": "trueaccord-project",
+  "name": "sample-debts-tracker",
   "version": "1.0.0",
-  "description": "Interview project for TrueAccord",
+  "description": "A debts tracker example application for demonstrating api usage, data manipulation, and testing",
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
